@@ -1,16 +1,17 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
-import "/node_modules/bootstrap/dist/js/bootstrap.min.js"
-import AddRoom from './components/room/AddRoom'
-
+import React from "react";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "/node_modules/bootstrap/dist/js/bootstrap.min.js";
+import AddRoom from "./components/room/AddRoom";
+import ExistingRooms from "./components/room/ExistingRooms";
 
 function App() {
   return (
     <>
-      <AddRoom/>
+      <AddRoom />
+      <ExistingRooms />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

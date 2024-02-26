@@ -2,14 +2,21 @@ import React, { useEffect, useState } from "react";
 import { getRoomTypes } from "../utils/ApiFunction";
 
 const RoomTypeSelector = ({ handleRoomInputChange, newRoom }) => {
-  const [roomTypes, setRoomTypes] = useState([""]);
+  const [roomTypes, setRoomTypes] = useState([]);
   const [showNewRoomTypeInput, setShowNewRoomTypeInput] = useState(false);
   const [newRoomType, setNewRoomType] = useState("");
 
   useEffect(() => {
-    getRoomTypes().then((data) => {
-      setRoomTypes(data);
-    });
+    const fetchData = async () => {
+      try {
+        const data = await getRoomTypes();
+        setRoomTypes(data);
+      } catch (error) {
+        console.error("Error fetching room types", error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   const handleNewRoomTypeInputChange = (e) => {

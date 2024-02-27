@@ -17,10 +17,16 @@ const EditRoom = () => {
 
   const { roomId } = useParams();
 
-  const handleRoomInputChange = (e) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
 
     setRoom({ ...room, [name]: value });
+  };
+
+  const handleImageChange = (e) => {
+    const selectedImage = e.target.files[0];
+    setRoom({ ...room, photo: selectedImage });
+    setImagePreview(URL.createObjectURL(selectedImage));
   };
 
   useEffect(() => {
@@ -37,29 +43,24 @@ const EditRoom = () => {
     fetchRoom();
   }, [roomId]);
 
-  const handleImageChange = (e) => {
-    const selectedImage = e.target.files[0];
-    setRoom({ ...room, photo: selectedImage });
-    setImagePreview(URL.createObjectURL(selectedImage));
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const response = await updateRoom(roomId, room);
+
       if (response.status === 200) {
         setSuccessMessage("Room updated successfully");
         const updatedRoomData = await getRoomById(roomId);
-        setRoom({
-          updatedRoomData,
-        });
+
+        setRoom(updatedRoomData);
         setImagePreview(updatedRoomData.photo);
         setErrorMessage("");
       } else {
         setErrorMessage("Error updating room");
       }
     } catch (error) {
+      console.log(error);
       setErrorMessage(error.message);
     }
 
@@ -95,7 +96,7 @@ const EditRoom = () => {
                 id="roomType"
                 name="roomType"
                 value={room.roomType}
-                onChange={handleImageChange}
+                onChange={handleInputChange}
               />
             </div>
 
@@ -109,7 +110,7 @@ const EditRoom = () => {
                 type="number"
                 name="roomPrice"
                 value={room.roomPrice}
-                onChange={handleRoomInputChange}
+                onChange={handleInputChange}
               />
             </div>
 
@@ -140,7 +141,7 @@ const EditRoom = () => {
                 to={"/existing-rooms"}
                 className="btn btn-outline-info ml-5"
               >
-                back
+                Back
               </Link>
               <button type="submit" className="btn btn-outline-warning">
                 Edit Room

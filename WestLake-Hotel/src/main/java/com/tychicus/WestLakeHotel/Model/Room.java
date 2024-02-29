@@ -1,4 +1,5 @@
 package com.tychicus.WestLakeHotel.Model;
+
 import jakarta.persistence.*;
 import lombok.*;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -28,7 +29,7 @@ public class Room {
     @OneToMany(
             mappedBy = "room",
             fetch = FetchType.LAZY,
-            cascade= CascadeType.ALL
+            cascade = CascadeType.ALL
     )
     private List<BookedRoom> bookings;
 
@@ -38,13 +39,13 @@ public class Room {
 
 
     public void addBooking(BookedRoom booking) {
-        if (bookings ==  null) {
+        if (bookings == null) {
             bookings = new ArrayList<>();
         }
 
         bookings.add(booking);
         booking.setRoom(this);
-        isBooked  = true;
+        isBooked = true;
         String bookingCode = RandomStringUtils.randomNumeric(10);
         booking.setBookingConfirmationCode(bookingCode);
     }

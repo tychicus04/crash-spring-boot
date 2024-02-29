@@ -57,11 +57,10 @@ const BookingSummary = ({ booking, payment, isFormValid, onConfirm }) => {
       <div>
         <h5>Number Of Guests</h5>
         <strong>
-          Adult{booking.numberOfAdults > 1 ? "s" : ""} :{" "}
-          {booking.numberOfAdults}
+          Adult{booking.numOfAdults > 1 ? "s" : ""} : {booking.numOfAdults}
         </strong>
         <br />
-        <strong>Children : {booking.numberOfChildren}</strong>
+        <strong>Children : {booking.numOfChildren}</strong>
       </div>
       {payment > 0 ? (
         <>
@@ -72,9 +71,12 @@ const BookingSummary = ({ booking, payment, isFormValid, onConfirm }) => {
             <Button variant="success" onClick={handleConfirmBooking}>
               {isProcessingPayment ? (
                 <>
-                  <span className="me-2" role="status" aria-hidden="true">
-                    Booking Confirmed, redirecting to payment ....
-                  </span>
+                  <span
+                    className="spinner-border spinner-border-sm me-2"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  Booking Confirmed, redirecting to payment ....
                 </>
               ) : (
                 "Confirm Booking and proceed to payment"

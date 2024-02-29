@@ -101,7 +101,7 @@ export async function getAllBookings() {
 }
 
 /* This function get booking by the confirmation code*/
-export async function getBookingConfirmatioonCode(confirmationCode) {
+export async function getBookingConfirmationCode(confirmationCode) {
   try {
     const result = await api.get(`/bookings/confirmation/${confirmationCode}`);
     return result.data;
@@ -122,4 +122,12 @@ export async function cancelBooking(bookingId) {
   } catch (error) {
     throw new Error(`Error cancelling booking: ${error.message}`);
   }
+}
+
+// this function gets all available  rooms from the database with a given checkInDate, checkOutDate and  roomType
+export async function getAvailableRoom(checkInDate, checkOutDate, roomType) {
+  const result = await api.get(
+    `rooms/available-rooms?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&roomType=${roomType}`
+  );
+  return result;
 }

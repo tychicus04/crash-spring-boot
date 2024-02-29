@@ -11,6 +11,7 @@ const RoomTypeSelector = ({ handleRoomInputChange, newRoom }) => {
       try {
         const data = await getRoomTypes();
         setRoomTypes(data);
+        console.log(data);
       } catch (error) {
         console.error("Error fetching room types", error);
       }
@@ -33,7 +34,7 @@ const RoomTypeSelector = ({ handleRoomInputChange, newRoom }) => {
 
   return (
     <>
-      {roomTypes.length > 0 && (
+      {roomTypes.length >= 0 && (
         <div>
           <select
             required
@@ -44,6 +45,7 @@ const RoomTypeSelector = ({ handleRoomInputChange, newRoom }) => {
               if (e.target.value === "Add New") {
                 setShowNewRoomTypeInput(true);
               } else {
+                setShowNewRoomTypeInput(false);
                 handleRoomInputChange(e);
               }
             }}

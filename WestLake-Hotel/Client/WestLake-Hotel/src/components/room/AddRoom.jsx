@@ -132,11 +132,11 @@ const AddRoom = () => {
                 )}
               </div>
 
-              <div className="d-grid d-md-flex mt-2">
+              <div className="d-grid d-md-flex mt-2 ">
                 <Link to={"/existing-rooms"} className="btn btn-outline-info">
                   Back
                 </Link>
-                <button className="btn btn-outline-primary ml-5">
+                <button className="btn btn-outline-primary ms-3">
                   Save Room
                 </button>
               </div>

@@ -78,6 +78,7 @@ const NavBar = () => {
                     Profile
                   </Link>
                 </li>
+                <hr />
 
                 <li>
                   <Link to={"/logout"} className="dropdown-item">

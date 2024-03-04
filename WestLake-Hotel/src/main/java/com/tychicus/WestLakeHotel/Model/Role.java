@@ -1,6 +1,7 @@
 package com.tychicus.WestLakeHotel.Model;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,17 +18,18 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "roles")
     private Collection<User> users = new HashSet<>();
+    public Role(String name) {
+        this.name = name;
+    }
 
     public void assignRoleToUser(User user) {
         user.getRoles().add(this);
         this.getUsers().add(user);
-
-
     }
 
     public void removeUserFromRole(User user) {
@@ -35,10 +37,10 @@ public class Role {
         this.getUsers().remove(user);
     }
 
-    public  void removeAllUsersFromRole() {
+    public void removeAllUsersFromRole() {
         if (this.getUsers() != null) {
             List<User> roleUsers = this.getUsers().stream().toList();
-            roleUsers.forEach(this :: removeUserFromRole);
+            roleUsers.forEach(this::removeUserFromRole);
         }
     }
 

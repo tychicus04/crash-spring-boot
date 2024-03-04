@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Header from "../common/Header";
 
 const BookingSuccess = () => {
@@ -22,6 +22,9 @@ const BookingSuccess = () => {
           </div>
         )}
       </div>
+      <Link to={"/"} className="btn btn-outline-info">
+        Back
+      </Link>
     </div>
   );
 };

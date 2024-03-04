@@ -11,9 +11,11 @@ const BookingForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [roomPrice, setRoomPrice] = useState(0);
 
+  const currentUser = localStorage.getItem("userId");
+
   const [booking, setBooking] = useState({
     guestFullName: "",
-    guestEmail: "",
+    guestEmail: currentUser,
     checkInDate: "",
     checkOutDate: "",
     numOfAdults: "",

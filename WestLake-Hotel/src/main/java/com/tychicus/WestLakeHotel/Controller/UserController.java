@@ -18,13 +18,13 @@ public class UserController {
     private final IUserService userService;
 
     @GetMapping("/all")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<User>> getUsers() {
         return new ResponseEntity<>(userService.getUsers(), HttpStatus.FOUND);
     }
 
     @GetMapping("/{email}")
-//    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
-
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> getUser(@PathVariable("email") String email) {
         try {
             User theUser = userService.getUser(email);
@@ -37,11 +37,12 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{userId}")
-    public ResponseEntity<String> deleteUser(@PathVariable("userId") String email ) {
+    @PreAuthorize("hasRole('ROLE_ADMIN') or (hasRole('ROLE_USER') and #email == principal.username)")
+    public ResponseEntity<String> deleteUser(@PathVariable("userId") String email) {
         try {
             userService.deleteUser(email);
             return ResponseEntity.ok("User deleted successfully");
-        }catch (UsernameNotFoundException e) {
+        } catch (UsernameNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting user: " + e.getMessage());

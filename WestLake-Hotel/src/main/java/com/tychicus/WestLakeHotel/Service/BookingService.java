@@ -54,6 +54,11 @@ public class BookingService implements IBookingService {
         return bookingRepository.findAll();
     }
 
+    @Override
+    public List<BookedRoom> getBookingsByUserEmail(String email) {
+        return bookingRepository.findByGuestEmail(email);
+    }
+
     private boolean roomIsAvailable(List<BookedRoom> existingBookings, BookedRoom bookingRequest) {
         return existingBookings.stream()
                 .noneMatch(existingBooking ->

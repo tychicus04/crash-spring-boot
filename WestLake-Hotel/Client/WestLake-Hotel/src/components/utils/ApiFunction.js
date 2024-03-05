@@ -3,7 +3,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "http://localhost:9192",
+  baseURL: import.meta.env.VITE_BASE_URL,
 });
 
 export const getHeader = () => {
@@ -217,5 +217,16 @@ export async function getBookingsByUserId(userId, token) {
   } catch (error) {
     console.error("Error fetching bookings:", error.message);
     throw new Error("Failed to fetch bookings");
+  }
+}
+
+export async function getAllUsers() {
+  try {
+    const result = await api.get("/users/all");
+    console.log(result.data);
+    return result.data;
+  } catch (error) {
+    console.log("2");
+    throw new Error("Error fetching users");
   }
 }

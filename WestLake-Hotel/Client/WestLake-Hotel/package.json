@@ -3,7 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "proxy": "http://localhost:9192",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -29,6 +28,7 @@
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
     "@vitejs/plugin-react": "^4.2.1",
+    "dotenv-webpack": "^8.0.1",
     "eslint": "^8.56.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",

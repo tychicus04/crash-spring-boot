@@ -10,11 +10,7 @@ const Admin = () => {
       <hr />
       <Link to={"/existing-bookings"}>Mannage Bookings</Link>
       <hr />
-      <Link
-      // to={"/existing-users"}
-      >
-        Mannage Users
-      </Link>
+      {/* <Link to={"/existing-users"}>Mannage Users</Link> */}
     </section>
   );
 };

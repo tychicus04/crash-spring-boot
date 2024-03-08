@@ -55,9 +55,9 @@ public class WebSecurityConfig {
                         exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**", "/rooms/**","/bookings/**", "/users/**")
+                        .requestMatchers("/auth/**", "/rooms/**","/bookings/**", "/users/**",  "/roles/**")
                         .permitAll()
-                        .requestMatchers("/roles/**").hasRole("ADMIN")
+//                        .requestMatchers("/roles/**").hasRole("ADMIN")
                         .anyRequest().authenticated());
         http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(authenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);

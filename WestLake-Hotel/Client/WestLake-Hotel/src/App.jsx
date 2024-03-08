@@ -24,6 +24,9 @@ import RequireAuth from "./components/auth/RequireAuth";
 import ExistingUsers from "./components/user/ExistingUsers";
 
 function App() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("userId");
+  localStorage.removeItem("userRole");
   return (
     <AuthProvider>
       <main>

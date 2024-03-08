@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaEdit, FaEye, FaTrashAlt } from "react-icons/fa";
 import RoomPaginator from "../common/RoomPaginator";
 import RoomFilter from "../common/RoomFilter";
@@ -16,14 +16,18 @@ const ExistingUsers = () => {
   const [selectedUserRole, setSelectedUserRole] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(3);
     fetchUsers();
   }, []);
 
   const fetchUsers = async () => {
     setIsLoading(true);
     try {
+      console.log(2);
       const result = await getAllUsers();
       console.log(result);
       setUsers(result);
@@ -66,7 +70,7 @@ const ExistingUsers = () => {
     setCurrentPage(pageNumber);
   };
 
-  const handleDeleteUserById = async (userId) => {
+  const handleDeleteAccount = async (userId) => {
     const result = await deleteUser(userId);
     try {
       if (result === "") {
@@ -104,11 +108,11 @@ const ExistingUsers = () => {
             <div className="d-flex justify-content-between mb-3 mt-5">
               <h2>Existing Users</h2>
             </div>
-            <Row>
+            {/* <Row>
               <Col md={6} className="mb-2 md-mb-0">
                 <RoomFilter data={users} setFilteredData={setFilteredUsers} />
               </Col>
-            </Row>
+            </Row> */}
 
             <table className="table table-bordered table-hover">
               <thead>
@@ -127,19 +131,20 @@ const ExistingUsers = () => {
                     <td>{user.email}</td>
                     <td>{user.roles.name}</td>
                     <td className="gap-2">
-                      <Link to={`/edit-room/${user.id}`}>
+                      {/* <Link to={`/edit-room/${user.id}`}>
                         <span className="btn btn-info btn-sm">
                           <FaEye />
                         </span>
                         <span className="btn btn-warning btn-sm">
                           <FaEdit />
                         </span>
-                      </Link>
+                      </Link> */}
 
                       <button
                         className="btn btn-danger btn-sm"
                         onClick={() => {
-                          handleDeleteUserById(user.id);
+                          console.log(user.email);
+                          handleDeleteAccount(user.email);
                         }}
                       >
                         <FaTrashAlt />

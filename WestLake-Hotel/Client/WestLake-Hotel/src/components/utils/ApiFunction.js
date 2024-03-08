@@ -187,6 +187,7 @@ export async function getUserProfile(userId, token) {
 /* This function delete a user */
 export async function deleteUser(userId) {
   try {
+    console.log(userId);
     const response = await api.delete(`/users/delete/${userId}`, {
       headers: getHeader(),
     });
@@ -223,11 +224,23 @@ export async function getBookingsByUserId(userId, token) {
 
 export async function getAllUsers() {
   try {
-    const result = await api.get("/users/all");
+    const result = await api.get("/users/all", {
+      headers: getHeader(),
+    });
     console.log(result.data);
     return result.data;
   } catch (error) {
     console.log("2");
     throw new Error("Error fetching users");
   }
+}
+
+/* This function will update user */
+export async function updateUser(roomId, roomData) {
+  const formData = new FormData();
+  formData.append("photo", roomData.photo);
+  formData.append("roomType", roomData.roomType);
+  formData.append("roomPrice", roomData.roomPrice);
+  const response = await api.put(`/rooms/update/${roomId}`, formData);
+  return response;
 }

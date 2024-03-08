@@ -47,6 +47,12 @@ public class RoleService implements IRoleService {
     }
 
     @Override
+    public Optional<Role> getRoleById(Long roleId) {
+        return Optional.of(roleRepository.findById(roleId).get());
+
+    }
+
+    @Override
     public User removeUserFromRole(Long userId, Long roleId) {
         Optional<User> user = userRepository.findById(userId);
         Optional<Role> role = roleRepository.findById(roleId);

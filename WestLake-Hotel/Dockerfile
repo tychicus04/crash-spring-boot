@@ -19,7 +19,7 @@ ENV spring.servlet.multipart.max-file-size=5MB
 ENV spring.servlet.multipart.max-request-size=5MB
 ENV spring.servlet.multipart.file-size-threshold=2KB
 ENV server.port=3000
-
+ENV management.security.enabled=false
 
 
 # EXPOSE 3000

@@ -1,0 +1,8 @@
+version: '3.0'
+services:
+  tai-web-fe:
+    image: client
+    build: . # current Dockerfile
+    network_mode: host # ??
+    ports:
+      - "80:80"

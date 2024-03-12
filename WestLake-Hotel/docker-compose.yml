@@ -1,0 +1,39 @@
+
+version: '2'
+services:
+  proxy:
+    image: reverse_proxy
+    build: ./nginx/
+    ports:
+      - "80:80"
+    networks:
+      - proxy
+  tai-web-fe:
+    image: client
+    build: ./Client/WestLake-Hotel/ # current Dockerfile
+    # network_mode: host # ??
+    networks:
+       - proxy
+  westlake-api:
+    build: .
+    image: wesklake:latest
+    networks:
+      - proxy
+      - back_end
+  mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - back_end
+networks:
+  proxy:
+    driver: bridge
+  back_end:
+    driver: bridge
+volumes:
+  db:
+    driver: local
